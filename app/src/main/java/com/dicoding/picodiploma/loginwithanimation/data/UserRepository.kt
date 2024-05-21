@@ -2,9 +2,11 @@ package com.dicoding.picodiploma.loginwithanimation.data
 
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
+import com.dicoding.picodiploma.loginwithanimation.data.remote.LoginResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.RegisterResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -29,12 +31,24 @@ class UserRepository private constructor(
 
     suspend fun register(name: String, email: String, password: String ) {
         try {
-            apiService.register(name, email, password)
+            val register = apiService.register(name, email, password)
+            Log.d("register", "Success: ${register.message}")
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
-            Log.d("SignUpViewModel", "Error: ${errorResponse.message}")
+            Log.d("register", "Error: ${errorResponse.message}")
             // todo: show error message
+        }
+    }
+
+    suspend fun login(email: String, password: String) {
+        try {
+            val login = apiService.login(email, password)
+            Log.d("login", "Error: ${login.message}")
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
+            Log.d("login", "Error: ${errorResponse.message}")
         }
     }
 

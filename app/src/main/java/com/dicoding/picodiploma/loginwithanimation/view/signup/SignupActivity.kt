@@ -45,7 +45,19 @@ class SignupActivity : AppCompatActivity() {
             val name = binding.edRegisterName.text.toString()
             val email = binding.edRegisterEmail.text.toString()
             val password = binding.edRegisterPassword.text.toString()
-            val register = viewModel.register(name = name, email = email, password = password)
+            viewModel.register(name = name, email = email, password = password)
+            AlertDialog.Builder(this).apply {
+                setTitle("Success!")
+                setMessage("Anda berhasil membuat akun.\nSilakan Login!")
+                setPositiveButton("Lanjut") { _, _ ->
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+                create()
+                show()
+            }
         }
     }
 }

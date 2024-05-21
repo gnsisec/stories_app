@@ -44,19 +44,21 @@ class LoginActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
             val email = binding.edLoginEmail.text.toString()
+            val password = binding.edLoginPassword.text.toString()
+            viewModel.login(email, password)
             viewModel.saveSession(UserModel(email, "sample_token"))
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                setPositiveButton("Lanjut") { _, _ ->
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                }
-                create()
-                show()
-            }
+//            AlertDialog.Builder(this).apply {
+//                setTitle("Yeah!")
+//                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
+//                setPositiveButton("Lanjut") { _, _ ->
+//                    val intent = Intent(context, MainActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                    startActivity(intent)
+//                    finish()
+//                }
+//                create()
+//                show()
+//            }
         }
     }
 

@@ -2,7 +2,7 @@ package com.dicoding.picodiploma.loginwithanimation.data.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+data class SignUpResponse(
 
 	@field:SerializedName("error")
 	val error: Boolean,

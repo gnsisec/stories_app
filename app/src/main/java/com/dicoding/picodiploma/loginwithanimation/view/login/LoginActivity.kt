@@ -1,5 +1,6 @@
 package com.dicoding.picodiploma.loginwithanimation.view.login
 
+import android.content.ClipDescription
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,7 @@ import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
+    private val viewModel by viewModels<SignInViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityLoginBinding
@@ -26,6 +27,39 @@ class LoginActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+
+        viewModel.sign_in.observe(this) {
+            when (it.error) {
+                false -> {
+                    alertDialog("Success!", "Anda berhasil masuk ke akun!")
+                }
+                else -> {
+                    alertDialog("Gagal!", it.message)
+                }
+            }
+        }
+    }
+
+    private fun alertDialog(title: String, description: String) {
+        AlertDialog.Builder(this).apply {
+            setTitle(title)
+            setMessage(description)
+            when (title) {
+                "Success!" -> {
+                    setPositiveButton("Lanjut") { _, _ ->
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    }
+                } else -> {
+                    setNegativeButton("Ulangi") { _, _ -> }
+                }
+            }
+            create()
+            show()
+        }
     }
 
     private fun setupView() {
@@ -46,19 +80,6 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.edLoginEmail.text.toString()
             val password = binding.edLoginPassword.text.toString()
             viewModel.login(email, password)
-            viewModel.saveSession(UserModel(email, "sample_token"))
-//            AlertDialog.Builder(this).apply {
-//                setTitle("Yeah!")
-//                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-//                setPositiveButton("Lanjut") { _, _ ->
-//                    val intent = Intent(context, MainActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                    finish()
-//                }
-//                create()
-//                show()
-//            }
         }
     }
 

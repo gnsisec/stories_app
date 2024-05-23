@@ -6,10 +6,11 @@ import androidx.lifecycle.LiveData
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
-import com.dicoding.picodiploma.loginwithanimation.data.remote.LoginResponse
-import com.dicoding.picodiploma.loginwithanimation.data.remote.RegisterResponse
+import com.dicoding.picodiploma.loginwithanimation.data.remote.SignInResponse
+import com.dicoding.picodiploma.loginwithanimation.data.remote.SignUpResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Call
 import retrofit2.HttpException
 
 class UserRepository private constructor(
@@ -29,27 +30,12 @@ class UserRepository private constructor(
         userPreference.logout()
     }
 
-    suspend fun register(name: String, email: String, password: String ) {
-        try {
-            val register = apiService.register(name, email, password)
-            Log.d("register", "Success: ${register.message}")
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
-            Log.d("register", "Error: ${errorResponse.message}")
-            // todo: show error message
-        }
+    suspend fun signup(name: String, email: String, password: String) : SignUpResponse {
+        return apiService.register(name, email, password)
     }
 
-    suspend fun login(email: String, password: String) {
-        try {
-            val login = apiService.login(email, password)
-            Log.d("login", "Error: ${login.message}")
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
-            Log.d("login", "Error: ${errorResponse.message}")
-        }
+    suspend fun login(email: String, password: String) : SignInResponse {
+        return apiService.login(email, password)
     }
 
     companion object {

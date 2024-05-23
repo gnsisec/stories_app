@@ -11,12 +11,12 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ): RegisterResponse
+    ): SignUpResponse
 
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): LoginResponse
+    ): SignInResponse
 }

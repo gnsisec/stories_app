@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.logoutButton.setOnClickListener {
+        binding.actionLogout.setOnClickListener {
             viewModel.logout()
         }
     }

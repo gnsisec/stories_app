@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+
+        viewModel.getStories()
     }
 
     private fun setupView() {

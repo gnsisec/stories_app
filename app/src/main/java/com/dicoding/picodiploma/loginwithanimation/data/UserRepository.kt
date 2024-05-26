@@ -8,10 +8,8 @@ import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignInResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignUpResponse
-import com.google.gson.Gson
+import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryResponse
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
-import retrofit2.HttpException
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
@@ -36,6 +34,10 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String) : SignInResponse {
         return apiService.login(email, password)
+    }
+
+    suspend fun getStories() : StoryResponse {
+        return apiService.getStories()
     }
 
     companion object {

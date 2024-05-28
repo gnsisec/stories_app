@@ -16,11 +16,10 @@ import retrofit2.HttpException
 class SignInViewModel(private val repository: UserRepository) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
-
     private val _sign_in = MutableLiveData<SignInResponse>()
     val sign_in : LiveData<SignInResponse> = _sign_in
 
-    private fun saveSession(user: UserModel) {
+    fun saveSession(user: UserModel) {
         viewModelScope.launch {
             repository.saveSession(user)
         }
@@ -30,7 +29,7 @@ class SignInViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 _sign_in.value = repository.login(email, password)
-                saveSession( UserModel(email, _sign_in.value!!.loginResult.token) )
+                repository.saveSession(UserModel(email, _sign_in.value!!.loginResult.token, true))
                 Log.d("login", "Success: ${_sign_in.value!!.message}")
                 Log.d("login", "Success: ${_sign_in.value!!.error}")
             } catch (e: HttpException) {

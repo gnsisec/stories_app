@@ -1,10 +1,10 @@
 package com.dicoding.picodiploma.loginwithanimation.data.remote
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
     @FormUrlEncoded
@@ -23,5 +23,5 @@ interface ApiService {
     ): SignInResponse
 
     @GET("stories")
-    suspend fun getStories(): StoryResponse
+    suspend fun getStories(@Query("page") page: Int = 1, @Query("size") size: Int = 15): StoryResponse
 }

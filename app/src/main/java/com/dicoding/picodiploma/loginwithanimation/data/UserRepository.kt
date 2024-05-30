@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
+import com.dicoding.picodiploma.loginwithanimation.data.remote.ListStoryItem
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignInResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignUpResponse
+import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryDetailResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryResponse
 import kotlinx.coroutines.flow.Flow
 
@@ -38,6 +40,10 @@ class UserRepository private constructor(
 
     suspend fun getStories() : StoryResponse {
         return apiService.getStories()
+    }
+
+    suspend fun getStoryDetail(id: String) : StoryDetailResponse {
+        return apiService.getDetailStory(id)
     }
 
     companion object {

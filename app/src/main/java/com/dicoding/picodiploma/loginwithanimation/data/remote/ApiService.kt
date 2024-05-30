@@ -4,6 +4,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -24,4 +25,8 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getStories(@Query("page") page: Int = 1, @Query("size") size: Int = 15): StoryResponse
+
+   @GET("stories/{id}")
+   suspend fun  getDetailStory(@Path("id") id: String): StoryDetailResponse
+
 }

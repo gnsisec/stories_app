@@ -10,9 +10,9 @@
 
     <ImageView
         android:id="@+id/iv_preview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="240dp"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:scaleType="fitCenter"
         android:paddingTop="-20dp"
         app:layout_constraintBottom_toTopOf="@+id/b_camera"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,7 @@
 package com.dicoding.picodiploma.loginwithanimation.view.story
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +10,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityStoryBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainViewModel
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class StoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryBinding

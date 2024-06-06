@@ -17,5 +17,6 @@
     <string name="galery">Galery</string>
     <string name="description">Description max 180 characters</string>
     <string name="upload">Upload</string>
+    <string name="empty_image_warning">Empty Image</string>
 
 </resources>

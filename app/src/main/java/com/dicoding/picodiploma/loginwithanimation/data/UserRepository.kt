@@ -7,7 +7,10 @@ import com.dicoding.picodiploma.loginwithanimation.data.remote.SignInResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignUpResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryDetailResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryResponse
+import com.dicoding.picodiploma.loginwithanimation.data.remote.UploadResponse
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
@@ -40,6 +43,10 @@ class UserRepository private constructor(
 
     suspend fun getStoryDetail(id: String): StoryDetailResponse {
         return apiService.getDetailStory(id)
+    }
+
+    suspend fun uploadStory(file: MultipartBody.Part, description: RequestBody) : UploadResponse {
+        return apiService.uploadStory(file, description)
     }
 
     companion object {

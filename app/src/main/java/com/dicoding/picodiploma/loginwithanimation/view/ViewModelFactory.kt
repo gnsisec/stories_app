@@ -11,7 +11,8 @@ import com.dicoding.picodiploma.loginwithanimation.view.signup.SignUpViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.story.StoryViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.upload.UploadViewModel
 
-class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: UserRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -19,24 +20,29 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(SignInViewModel::class.java) -> {
                 SignInViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
                 StoryViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
                 UploadViewModel(repository) as T
             }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
 
     companion object {
-//        @Volatile
+        //        @Volatile
 //        private var INSTANCE: ViewModelFactory? = null
         @JvmStatic
         fun getInstance(context: Context) = ViewModelFactory(Injection.provideRepository(context))

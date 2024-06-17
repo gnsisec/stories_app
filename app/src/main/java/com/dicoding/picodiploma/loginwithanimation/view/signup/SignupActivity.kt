@@ -3,7 +3,6 @@ package com.dicoding.picodiploma.loginwithanimation.view.signup
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -31,9 +30,11 @@ class SignupActivity : AppCompatActivity() {
                 "User created" -> {
                     alertDialog("Success!", "Anda berhasil membuat akun.\nSilahkan login!")
                 }
+
                 "Email already exists" -> {
                     alertDialog("Gagal!", "Email sudah terdaftar!")
                 }
+
                 else -> {
                     alertDialog("Gagal!", it.message)
                 }
@@ -71,14 +72,17 @@ class SignupActivity : AppCompatActivity() {
                 "Success!" -> {
                     setPositiveButton("Lanjut") { _, _ ->
                         val intent = Intent(context, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                         finish()
                     }
                 }
+
                 "Gagal!" -> {
                     setNegativeButton("Ulangi") { _, _ -> }
                 }
+
                 else -> {
                     setNegativeButton("Ulangi") { _, _ -> }
                 }

@@ -11,12 +11,12 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class SignUpViewModel (private val repository: UserRepository) : ViewModel() {
+class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
     private val _signup = MutableLiveData<SignUpResponse>()
-    val signup : LiveData<SignUpResponse> = _signup
+    val signup: LiveData<SignUpResponse> = _signup
 
     fun signup(name: String, email: String, password: String) {
         viewModelScope.launch {

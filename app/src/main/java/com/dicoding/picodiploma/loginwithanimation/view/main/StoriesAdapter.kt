@@ -16,14 +16,15 @@ import com.dicoding.picodiploma.loginwithanimation.view.story.StoryActivity
 class StoriesAdapter(private val context: Context) :
     ListAdapter<ListStoryItem, StoriesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    class ViewHolder(private val binding: ListStoryBinding) : RecyclerView.ViewHolder(binding.root) {
-            fun bind(item: ListStoryItem) {
-                binding.tvItemName.text = item.name
-                binding.tvItemDesc.text = item.description
-                Glide.with(this@ViewHolder.itemView.context).load("${item.photoUrl}")
-                    .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItemPhoto)
-            }
+    class ViewHolder(private val binding: ListStoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: ListStoryItem) {
+            binding.tvItemName.text = item.name
+            binding.tvItemDesc.text = item.description
+            Glide.with(this@ViewHolder.itemView.context).load("${item.photoUrl}")
+                .diskCacheStrategy(DiskCacheStrategy.DATA).into(binding.ivItemPhoto)
         }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListStoryBinding.inflate(LayoutInflater.from(parent.context))

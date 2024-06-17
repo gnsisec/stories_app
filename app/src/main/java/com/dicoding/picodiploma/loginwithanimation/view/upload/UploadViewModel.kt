@@ -15,7 +15,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
 
-class UploadViewModel (private val repository: UserRepository) : ViewModel() {
+class UploadViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -36,7 +36,7 @@ class UploadViewModel (private val repository: UserRepository) : ViewModel() {
                 val upload = repository.uploadStory(file, description)
                 Log.d("upload", "Success: ${upload.message}")
                 triggerFinishActivity()
-            } catch (e:HttpException) {
+            } catch (e: HttpException) {
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, UploadResponse::class.java)
                 Log.d("upload", "Error: ${errorResponse.message}")

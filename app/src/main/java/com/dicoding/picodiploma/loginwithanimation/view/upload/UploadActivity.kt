@@ -123,6 +123,7 @@ class UploadActivity : AppCompatActivity() {
         binding.btnUpload.isEnabled = !isLoading
         binding.bCamera.isEnabled = !isLoading
         binding.bGalery.isEnabled = !isLoading
+        binding.tfDescription.isEnabled = !isLoading
         binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

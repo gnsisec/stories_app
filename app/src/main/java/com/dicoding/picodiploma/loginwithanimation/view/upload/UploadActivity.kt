@@ -13,6 +13,7 @@ import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityUploadBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.getImageUri
+import com.dicoding.picodiploma.loginwithanimation.view.reduceFileImage
 import com.dicoding.picodiploma.loginwithanimation.view.story.StoryViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
@@ -47,7 +48,7 @@ class UploadActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         currentImageUri?.let { uri ->
-            val imageFile = uriToFile(uri, this)
+            val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
             val description = binding.edAddDescription.text.toString()
 

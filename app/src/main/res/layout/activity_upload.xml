@@ -8,16 +8,27 @@
     android:padding="16dp"
     tools:context=".view.upload.UploadActivity">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/iv_preview"
         android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:scaleType="fitCenter"
         android:paddingTop="-20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/b_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/progressIndicator"
         app:srcCompat="@drawable/ic_preview" />
 
     <Button

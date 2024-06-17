@@ -1,21 +1,28 @@
 package com.dicoding.picodiploma.loginwithanimation.view.upload
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityUploadBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.getImageUri
+import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
 import com.dicoding.picodiploma.loginwithanimation.view.reduceFileImage
-import com.dicoding.picodiploma.loginwithanimation.view.story.StoryViewModel
 import com.dicoding.picodiploma.loginwithanimation.view.uriToFile
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -44,6 +51,16 @@ class UploadActivity : AppCompatActivity() {
         binding.btnUpload.setOnClickListener {
             uploadImage()
         }
+
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.finishActivityEvent.collect { finish() }
+            }
+        }
     }
 
     private fun uploadImage() {
@@ -60,7 +77,6 @@ class UploadActivity : AppCompatActivity() {
                 requestImageFile
             )
             viewModel.uploadStory(multipartBody, requestBody)
-            //showLoading(true)
         } ?: showToast(getString(R.string.empty_image_warning))
     }
 
@@ -101,5 +117,12 @@ class UploadActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.btnUpload.isEnabled = !isLoading
+        binding.bCamera.isEnabled = !isLoading
+        binding.bGalery.isEnabled = !isLoading
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

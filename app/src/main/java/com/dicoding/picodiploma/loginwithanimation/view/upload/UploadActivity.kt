@@ -31,10 +31,21 @@ class UploadActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         binding.bGalery.setOnClickListener {
             startGallery()

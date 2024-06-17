@@ -5,38 +5,64 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".view.upload.UploadActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/app_name" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appbar" />
 
     <ImageView
         android:id="@+id/iv_preview"
         android:layout_width="350dp"
-        android:layout_height="220dp"
-        android:scaleType="fitCenter"
+        android:layout_height="180dp"
+        android:layout_marginTop="20dp"
         android:paddingTop="-20dp"
-        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/b_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/progressIndicator"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
         app:srcCompat="@drawable/ic_preview" />
 
     <Button
         android:id="@+id/b_camera"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="20dp"
         android:text="@string/camera"
         app:layout_constraintEnd_toStartOf="@id/b_galery"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +72,7 @@
         android:id="@+id/b_galery"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
         android:text="@string/galery"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +83,8 @@
         android:id="@+id/tf_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/b_camera">
@@ -64,13 +92,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_add_description"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="14dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
             android:gravity="top"
             android:hint="@string/description"
             android:inputType="textMultiLine"
-            android:padding="20dp"
             android:maxLength="180"
+            android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/b_camera" />
@@ -80,7 +108,8 @@
         android:id="@+id/btn_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:text="@string/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

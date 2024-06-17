@@ -45,7 +45,7 @@ class UserRepository private constructor(
         return apiService.getDetailStory(id)
     }
 
-    suspend fun uploadStory(file: MultipartBody.Part, description: RequestBody) : UploadResponse {
+    suspend fun uploadStory(file: MultipartBody.Part, description: RequestBody): UploadResponse {
         return apiService.uploadStory(file, description)
     }
 

@@ -1,6 +1,5 @@
 package com.dicoding.picodiploma.loginwithanimation.view.login
 
-import android.content.ClipDescription
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityLoginBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
@@ -33,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
                 false -> {
                     alertDialog("Success!", "Anda berhasil masuk ke akun!")
                 }
+
                 else -> {
                     alertDialog("Gagal!", it.message)
                 }
@@ -53,7 +52,9 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                } else -> {
+                }
+
+                else -> {
                     setNegativeButton("Ulangi") { _, _ -> }
                 }
             }

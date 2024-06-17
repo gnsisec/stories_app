@@ -1,18 +1,16 @@
 package com.dicoding.picodiploma.loginwithanimation.view.main
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityMainBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.upload.UploadActivity
@@ -34,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
+        setSupportActionBar(toolbar)
+
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
@@ -49,9 +50,6 @@ class MainActivity : AppCompatActivity() {
             binding.rvStories.visibility = View.VISIBLE
         }
 
-        setupView()
-        setupAction()
-
         val storyListManager = LinearLayoutManager(this)
         binding.rvStories.layoutManager = storyListManager
 
@@ -59,36 +57,25 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, UploadActivity::class.java)
             startActivity(intent)
         }
-//        val itemDecoration = DividerItemDecoration(this, storyListManager.orientation)
-//        val drawable = GradientDrawable()
-//        drawable.setSize(10, 10)
-//        drawable.setStroke(2, Color.BLACK)
-//        itemDecoration.setDrawable(drawable)
-//        binding.rvStories.addItemDecoration(itemDecoration)
     }
 
-//    private fun displayResult() {
-//        val adapter = StoriesAdapter()
-//        adapter.submitList(searchViewModel.searchResult.value)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
 
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                viewModel.logout()
+                true
+            }
+
+            else -> {
+                Log.d("main", "kepencet else")
+                super.onOptionsItemSelected(item)
+            }
         }
-        supportActionBar?.hide()
     }
-
-    private fun setupAction() {
-//        binding.actionLogout.setOnClickListener {
-//            viewModel.logout()
-//        }
-    }
-
 }

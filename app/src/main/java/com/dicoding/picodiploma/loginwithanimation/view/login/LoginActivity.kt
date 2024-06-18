@@ -3,6 +3,7 @@ package com.dicoding.picodiploma.loginwithanimation.view.login
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -23,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
         setupAction()
 
         viewModel.sign_in.observe(this) {
@@ -36,6 +36,10 @@ class LoginActivity : AppCompatActivity() {
                     alertDialog("Gagal!", it.message)
                 }
             }
+        }
+
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
         }
     }
 
@@ -63,25 +67,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
-    }
-
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
             val email = binding.edLoginEmail.text.toString()
             val password = binding.edLoginPassword.text.toString()
             viewModel.login(email, password)
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.edLoginEmail.isEnabled = !isLoading
+        binding.edLoginPassword.isEnabled = !isLoading
+        binding.loginButton.isEnabled = !isLoading
     }
 
 }

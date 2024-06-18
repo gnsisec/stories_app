@@ -13,13 +13,15 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class SignInViewModel(private val repository: UserRepository) : ViewModel() {
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
-    val loading: LiveData<Boolean> = _loading
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     private val _sign_in = MutableLiveData<SignInResponse>()
     val sign_in: LiveData<SignInResponse> = _sign_in
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
                 _sign_in.value = repository.login(email, password)
                 repository.saveSession(UserModel(email, _sign_in.value!!.loginResult.token, true))
@@ -31,6 +33,7 @@ class SignInViewModel(private val repository: UserRepository) : ViewModel() {
                 _sign_in.value = errorResponse
                 Log.d("login", "Error: ${errorResponse.message}")
             }
+            _isLoading.value = false
         }
     }
 }

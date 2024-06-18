@@ -3,6 +3,7 @@ package com.dicoding.picodiploma.loginwithanimation.view.signup
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -39,6 +40,10 @@ class SignupActivity : AppCompatActivity() {
                     alertDialog("Gagal!", it.message)
                 }
             }
+        }
+
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
         }
     }
 
@@ -90,5 +95,13 @@ class SignupActivity : AppCompatActivity() {
             create()
             show()
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.edRegisterName.isEnabled = !isLoading
+        binding.edRegisterPassword.isEnabled = !isLoading
+        binding.edRegisterEmail.isEnabled = !isLoading
+        binding.signupButton.isEnabled = !isLoading
     }
 }

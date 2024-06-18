@@ -12,14 +12,15 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
-    val loading: LiveData<Boolean> = _loading
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _signup = MutableLiveData<SignUpResponse>()
     val signup: LiveData<SignUpResponse> = _signup
 
     fun signup(name: String, email: String, password: String) {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
                 _signup.value = repository.signup(name, email, password)
                 Log.d("register", "Success: ${_signup.value!!.message}")
@@ -31,6 +32,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                 Log.d("register", "Error: ${errorResponse.message}")
                 Log.d("register", "Error: ${errorResponse.error}")
             }
+            _isLoading.value = false
         }
     }
 }

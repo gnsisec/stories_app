@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     private val _stories = MutableLiveData<List<ListStoryItem>>()
     val stories: LiveData<List<ListStoryItem>> = _stories
 
@@ -30,6 +33,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun getStories() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
                 val getStory = repository.getStories()
                 Log.d("main", "Success: ${getStory.message}")
@@ -39,6 +43,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
                 val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
                 Log.d("main", "Error: ${errorResponse.message}")
             }
+            _isLoading.value = false
         }
     }
 }

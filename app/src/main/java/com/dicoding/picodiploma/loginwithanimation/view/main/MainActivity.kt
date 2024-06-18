@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
             binding.rvStories.visibility = View.VISIBLE
         }
 
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
         val storyListManager = LinearLayoutManager(this)
         binding.rvStories.layoutManager = storyListManager
 
@@ -77,5 +81,9 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

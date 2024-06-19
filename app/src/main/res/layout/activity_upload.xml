@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_back"
+            app:navigationIcon="@drawable/ic_back_white"
             app:title="@string/app_name" />
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -43,6 +43,9 @@ class StoryActivity : AppCompatActivity() {
         }
 
         val id = intent?.getStringExtra("id").toString()
+        binding.ivDetailPhoto.transitionName = "sharedImage"
+        binding.tvDetailName.transitionName = "sharedTitle"
+        binding.tvDetailDesc.transitionName = "sharedDesc"
         viewModel.getDetailStory(id)
     }
 

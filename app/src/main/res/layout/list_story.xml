@@ -21,6 +21,7 @@
             android:layout_width="370dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:transitionName="sharedImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,19 +35,21 @@
             android:textAlignment="textStart"
             android:textSize="23sp"
             android:textStyle="bold"
+            android:transitionName="sharedTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_item_photo"
             tools:text="Dicoding" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_item_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10sp"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="1"
             android:textAlignment="textStart"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:transitionName="sharedDesc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_item_name"
             tools:text="@tools:sample/lorem/random" />

@@ -1,9 +1,11 @@
 package com.dicoding.picodiploma.loginwithanimation.view.main
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +37,25 @@ class StoriesAdapter(private val context: Context) :
         val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
             val intent = Intent((it.context), StoryActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                context as Activity,
+                androidx.core.util.Pair(
+                    holder.itemView.findViewById(com.dicoding.picodiploma.loginwithanimation.R.id.iv_item_photo),
+                    "sharedImage"
+                ),
+                androidx.core.util.Pair(
+                    holder.itemView.findViewById(com.dicoding.picodiploma.loginwithanimation.R.id.tv_item_name),
+                    "sharedTitle"
+                ),
+                androidx.core.util.Pair(
+                    holder.itemView.findViewById(com.dicoding.picodiploma.loginwithanimation.R.id.tv_item_desc),
+                    "sharedDesc"
+                ),
+            )
             intent.putExtra("id", "${item.id}")
-            it.context.startActivity(intent)
+            it.context.startActivity(intent, options.toBundle())
         }
     }
 

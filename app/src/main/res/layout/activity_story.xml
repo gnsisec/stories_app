@@ -40,6 +40,7 @@
         android:layout_height="250dp"
         android:padding="10dp"
         android:scaleType="centerCrop"
+        android:transitionName="sharedImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar"
@@ -53,6 +54,7 @@
         android:textAlignment="textStart"
         android:textSize="23sp"
         android:textStyle="bold"
+        android:transitionName="sharedTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_detail_photo"
         tools:text="Dicoding" />
@@ -62,10 +64,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="3"
         android:paddingHorizontal="15dp"
+        android:paddingTop="10sp"
         android:textAlignment="textStart"
         android:textSize="15sp"
+        android:transitionName="sharedDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
         tools:text="@tools:sample/lorem/random" />

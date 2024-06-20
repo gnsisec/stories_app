@@ -64,6 +64,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
         android:text="@string/camera"
+        android:backgroundTint="@color/cadetGrey"
         app:layout_constraintEnd_toStartOf="@id/b_galery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
@@ -75,6 +76,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
         android:text="@string/galery"
+        android:backgroundTint="@color/cadetGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/b_camera"
         app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
@@ -111,6 +113,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
         android:text="@string/upload"
+        android:backgroundTint="@color/charcoal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tf_description" />

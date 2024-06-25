@@ -1,11 +1,8 @@
 package com.dicoding.picodiploma.loginwithanimation.view.login
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupAction()
 
-        viewModel.sign_in.observe(this) {
+        viewModel.signIn.observe(this) {
             when (it.error) {
                 false -> {
                     alertDialog("Success!", "Anda berhasil masuk ke akun!")

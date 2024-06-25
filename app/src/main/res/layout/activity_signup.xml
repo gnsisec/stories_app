@@ -23,6 +23,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:contentDescription="@string/signup_image"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Narada"
+            android:hint="@string/your_name"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="narada@hotmail.com"
+            android:hint="@string/your_email_address"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 

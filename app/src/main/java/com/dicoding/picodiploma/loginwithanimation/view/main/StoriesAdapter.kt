@@ -1,7 +1,6 @@
 package com.dicoding.picodiploma.loginwithanimation.view.main
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.dicoding.picodiploma.loginwithanimation.data.remote.ListStoryItem
 import com.dicoding.picodiploma.loginwithanimation.databinding.ListStoryBinding
 import com.dicoding.picodiploma.loginwithanimation.view.story.StoryActivity
 
-class StoriesAdapter(private val context: Context) :
+class StoriesAdapter :
     ListAdapter<ListStoryItem, StoriesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     class ViewHolder(private val binding: ListStoryBinding) :

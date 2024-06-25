@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
             viewModel.getStories()
         }
 
-        viewModel.stories.observe(this) { story ->
-            val adapter = StoriesAdapter(this)
+        viewModel.stories.observe(this) {
+            val adapter = StoriesAdapter()
             adapter.submitList(viewModel.stories.value)
             binding.rvStories.adapter = adapter
             binding.rvStories.visibility = View.VISIBLE

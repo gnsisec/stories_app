@@ -16,21 +16,21 @@ class SignInViewModel(private val repository: UserRepository) : ViewModel() {
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _sign_in = MutableLiveData<SignInResponse>()
-    val sign_in: LiveData<SignInResponse> = _sign_in
+    private val _signIn = MutableLiveData<SignInResponse>()
+    val signIn: LiveData<SignInResponse> = _signIn
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                _sign_in.value = repository.login(email, password)
-                repository.saveSession(UserModel(email, _sign_in.value!!.loginResult.token, true))
-                Log.d("login", "Success: ${_sign_in.value!!.message}")
-                Log.d("login", "Success: ${_sign_in.value!!.error}")
+                _signIn.value = repository.login(email, password)
+                repository.saveSession(UserModel(email, _signIn.value!!.loginResult.token, true))
+                Log.d("login", "Success: ${_signIn.value!!.message}")
+                Log.d("login", "Success: ${_signIn.value!!.error}")
             } catch (e: HttpException) {
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, SignInResponse::class.java)
-                _sign_in.value = errorResponse
+                _signIn.value = errorResponse
                 Log.d("login", "Error: ${errorResponse.message}")
             }
             _isLoading.value = false

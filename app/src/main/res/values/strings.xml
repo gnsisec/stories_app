@@ -18,5 +18,12 @@
     <string name="description">Description max 180 characters</string>
     <string name="upload">Upload</string>
     <string name="empty_image_warning">Please Upload with image</string>
+    <string name="login_image">Login image</string>
+    <string name="create_new_post">Create new post</string>
+    <string name="signup_image">signup image</string>
+    <string name="image_preview">Image preview</string>
+    <string name="welcome_image">Welcome Image</string>
+    <string name="your_name">your name</string>
+    <string name="your_email_address">your email address</string>
 
 </resources>

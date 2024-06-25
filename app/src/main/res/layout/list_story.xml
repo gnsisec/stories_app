@@ -20,7 +20,7 @@
             android:id="@+id/iv_item_photo"
             android:layout_width="370dp"
             android:layout_height="200dp"
-            android:contentDescription="Image Post"
+            android:contentDescription="@string/image_post"
             android:scaleType="centerCrop"
             android:transitionName="sharedImage"
             app:layout_constraintEnd_toEndOf="parent"

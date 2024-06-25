@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivityLoginBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
@@ -26,11 +27,12 @@ class LoginActivity : AppCompatActivity() {
         viewModel.signIn.observe(this) {
             when (it.error) {
                 false -> {
-                    alertDialog("Success!", "Anda berhasil masuk ke akun!")
+                    alertDialog(getString(R.string.success_login),
+                        getString(R.string.success_to_login_messgae))
                 }
 
                 else -> {
-                    alertDialog("Gagal!", it.message)
+                    alertDialog(getString(R.string.failed_login), it.message)
                 }
             }
         }
@@ -45,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
             setTitle(title)
             setMessage(description)
             when (title) {
-                "Success!" -> {
-                    setPositiveButton("Lanjut") { _, _ ->
+                getString(R.string.success_login) -> {
+                    setPositiveButton(R.string.continue_button) { _, _ ->
                         val intent = Intent(context, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    setNegativeButton("Ulangi") { _, _ -> }
+                    setNegativeButton(R.string.retry_button) { _, _ -> }
                 }
             }
             create()

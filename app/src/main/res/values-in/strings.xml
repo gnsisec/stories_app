@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dicoding App</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
+    <string name="name">Nama</string>
+    <string name="message_main_page">Happy learning at Dicoding.</string>
+    <string name="greeting">Halo %1$s,</string>
+    <string name="logout">Keluar</string>
+    <string name="camera">Kamera</string>
+    <string name="galery">Galeri</string>
+    <string name="description">Deskripsi maksimal 180 karakter</string>
+    <string name="upload">Unggah</string>
+    <string name="empty_image_warning">Gunakan gambar untuk mengunggah</string>
+    <string name="login_image">Gambar Masuk Akun</string>
+    <string name="create_new_post">Buat post baru</string>
+    <string name="signup_image">Gambar Daftar Akun</string>
+    <string name="image_preview">Pratinjau gamabr</string>
+    <string name="welcome_image">Gambar Selamat Datang</string>
+    <string name="your_name">nama kamu</string>
+    <string name="your_email_address">alamat email kamu</string>
+    <string name="retry_button">Ulangi</string>
+    <string name="continue_button">Lanjut</string>
+    <string name="success_login">Sukses!</string>
+    <string name="failed_login">Gagal!</string>
+    <string name="success_to_login_messgae">Anda berhasil masuk ke akun!</string>
+    <string name="account_created_message">Anda berhasil membuat akun.\nSilahkan login!</string>
+    <string name="failed_signup">Gagal!</string>
+    <string name="email_already_taken_message">Email sudah di daftarkan</string>
+</resources>

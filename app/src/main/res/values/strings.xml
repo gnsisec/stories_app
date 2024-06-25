@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">Dicoding App</string>
-    <string name="signup">Daftar</string>
-    <string name="login">Masuk</string>
-    <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
-    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
-    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Sign In</string>
+    <string name="message_welcome_page">Want to learn Android, iOS, Machine Learning, Cloud, Front-End, Back-End, and other IT fields? Just go to Dicoding!</string>
+    <string name="title_welcome_page">Welcome to Dicoding!</string>
+    <string name="title_signup_page">Please complete your information below.</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="message_login_page">Masukkan dulu datamu ya</string>
-    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
-    <string name="name">Nama</string>
+    <string name="message_login_page">Please enter your data first.</string>
+    <string name="title_login_page">Are you ready to upgrade your skills?</string>
+    <string name="name">Name</string>
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
-    <string name="greeting">Halo %1$s,</string>
-    <string name="logout">Keluar</string>
+    <string name="greeting">Hello %1$s,</string>
+    <string name="logout">Logout</string>
     <string name="camera">Camera</string>
-    <string name="galery">Galery</string>
+    <string name="galery">Gallery</string>
     <string name="description">Description max 180 characters</string>
     <string name="upload">Upload</string>
     <string name="empty_image_warning">Please Upload with image</string>
@@ -25,5 +25,16 @@
     <string name="welcome_image">Welcome Image</string>
     <string name="your_name">your name</string>
     <string name="your_email_address">your email address</string>
-
+    <string name="retry_button">Retry</string>
+    <string name="continue_button">Next</string>
+    <string name="success_login">Success!</string>
+    <string name="failed_login">Failed!</string>
+    <string name="success_to_login_messgae">Success to login!</string>
+    <string name="user_created" translatable="false">User created</string>
+    <string name="email_already_taken" translatable="false">Email is already taken</string>
+    <string name="email_already_taken_message">Email is already taken</string>
+    <string name="account_created_message">Account created. Please login!</string>
+    <string name="success_signup" translatable="false">Success!</string>
+    <string name="failed_signup">Failed!</string>
+    <string name="image_post">Image Post</string>
 </resources>

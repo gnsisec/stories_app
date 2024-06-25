@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.picodiploma.loginwithanimation.R
 import com.dicoding.picodiploma.loginwithanimation.databinding.ActivitySignupBinding
 import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
@@ -24,16 +25,16 @@ class SignupActivity : AppCompatActivity() {
 
         viewModel.signup.observe(this) {
             when (it.message) {
-                "User created" -> {
-                    alertDialog("Success!", "Anda berhasil membuat akun.\nSilahkan login!")
+                getString(R.string.user_created) -> {
+                    alertDialog(getString(R.string.success_signup), getString(R.string.account_created_message))
                 }
 
-                "Email already exists" -> {
-                    alertDialog("Gagal!", "Email sudah terdaftar!")
+                getString(R.string.email_already_taken) -> {
+                    alertDialog(getString(R.string.failed_signup), getString(R.string.email_already_taken_message))
                 }
 
                 else -> {
-                    alertDialog("Gagal!", it.message)
+                    alertDialog(getString(R.string.failed_signup), it.message)
                 }
             }
         }
@@ -57,8 +58,8 @@ class SignupActivity : AppCompatActivity() {
             setTitle(title)
             setMessage(description)
             when (title) {
-                "Success!" -> {
-                    setPositiveButton("Lanjut") { _, _ ->
+                getString(R.string.success_login) -> {
+                    setPositiveButton(getString(R.string.continue_button)) { _, _ ->
                         val intent = Intent(context, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -67,12 +68,8 @@ class SignupActivity : AppCompatActivity() {
                     }
                 }
 
-                "Gagal!" -> {
-                    setNegativeButton("Ulangi") { _, _ -> }
-                }
-
                 else -> {
-                    setNegativeButton("Ulangi") { _, _ -> }
+                    setNegativeButton(getString(R.string.retry_button)) { _, _ -> }
                 }
             }
             create()

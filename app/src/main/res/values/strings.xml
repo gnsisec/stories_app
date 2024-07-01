@@ -39,4 +39,6 @@
     <string name="image_post" translatable="false">Image Post</string>
     <string name="appwidget_text" translatable="false">Dicoding Feeds</string>
     <string name="empty_text" translatable="false">NO DATA</string>
+    <string name="map">Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

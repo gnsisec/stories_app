@@ -41,6 +41,10 @@ class UserRepository private constructor(
         return apiService.getStories()
     }
 
+    suspend fun getStoriesWithLocation(): StoryResponse {
+        return apiService.getStoriesWithLocation()
+    }
+
     suspend fun getStoryDetail(id: String): StoryDetailResponse {
         return apiService.getDetailStory(id)
     }
@@ -53,15 +57,5 @@ class UserRepository private constructor(
 
         fun getInstance(userPreference: UserPreference, apiService: ApiService): UserRepository =
             UserRepository(userPreference, apiService)
-//        @Volatile
-//        private var instance: UserRepository? = null
-//        fun getInstance(
-//            userPreference: UserPreference,
-//            apiService: ApiService
-//        ): UserRepository =
-//            instance ?: synchronized(this) {
-//                instance ?: UserRepository(userPreference, apiService)
-//            }.also { instance = it }
-//    }
     }
 }

@@ -1,8 +1,14 @@
 package com.dicoding.picodiploma.loginwithanimation.data
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
+import com.dicoding.picodiploma.loginwithanimation.data.remote.ListStoryItem
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignInResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.SignUpResponse
 import com.dicoding.picodiploma.loginwithanimation.data.remote.StoryDetailResponse
@@ -37,8 +43,15 @@ class UserRepository private constructor(
         return apiService.login(email, password)
     }
 
-    suspend fun getStories(): StoryResponse {
-        return apiService.getStories()
+    fun getStories(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 3
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService)
+            }
+        ).liveData
     }
 
     suspend fun getStoriesWithLocation(): StoryResponse {

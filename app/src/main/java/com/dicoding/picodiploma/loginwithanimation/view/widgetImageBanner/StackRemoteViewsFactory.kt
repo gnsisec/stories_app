@@ -21,16 +21,16 @@ internal class StackRemoteViewsFactory(private val mContext: Context) :
     override fun onDataSetChanged() = runBlocking {
         try {
             val stories = Injection.provideRepository(mContext).getStories()
-            if (stories.error == true) return@runBlocking
-            val bitmap = stories.listStory!!.map {
-                Glide.with(mContext)
-                    .asBitmap()
-                    .load(it!!.photoUrl)
-                    .override(256, 2356)
-                    .submit().get()
-            }
+//            if (stories.error == true) return@runBlocking
+//            val bitmap = stories.listStory!!.map {
+//                Glide.with(mContext)
+//                    .asBitmap()
+//                    .load(it!!.photoUrl)
+//                    .override(256, 2356)
+//                    .submit().get()
+//            }
             mWidgetItems.clear()
-            mWidgetItems.addAll(bitmap)
+//            mWidgetItems.addAll(bitmap)
         } catch (e: Exception) {
             e.printStackTrace()
         }

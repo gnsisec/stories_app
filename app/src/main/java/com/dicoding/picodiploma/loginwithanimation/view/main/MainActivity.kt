@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.rvStories.layoutManager = LinearLayoutManager(this)
 
         val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
@@ -36,22 +37,14 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
-            viewModel.getStories()
         }
 
+        val adapter = StoriesAdapter()
+        binding.rvStories.adapter = adapter
+        binding.rvStories.visibility = View.VISIBLE
         viewModel.stories.observe(this) {
-            val adapter = StoriesAdapter()
-            adapter.submitList(viewModel.stories.value)
-            binding.rvStories.adapter = adapter
-            binding.rvStories.visibility = View.VISIBLE
+            adapter.submitData(lifecycle, it)
         }
-
-        viewModel.isLoading.observe(this) {
-            showLoading(it)
-        }
-
-        val storyListManager = LinearLayoutManager(this)
-        binding.rvStories.layoutManager = storyListManager
 
         binding.fabAddStory.setOnClickListener {
             val intent = Intent(this, UploadActivity::class.java)

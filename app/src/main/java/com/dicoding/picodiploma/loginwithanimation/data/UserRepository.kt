@@ -1,10 +1,12 @@
 package com.dicoding.picodiploma.loginwithanimation.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.dicoding.picodiploma.loginwithanimation.data.database.StoryDatabase
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.dicoding.picodiploma.loginwithanimation.data.remote.ApiService
@@ -20,7 +22,8 @@ import okhttp3.RequestBody
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val database: StoryDatabase
 ) {
 
     suspend fun saveSession(user: UserModel) {
@@ -43,13 +46,15 @@ class UserRepository private constructor(
         return apiService.login(email, password)
     }
 
+    @OptIn(ExperimentalPagingApi::class)
     fun getStories(): LiveData<PagingData<ListStoryItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 3
+                pageSize = 5
             ),
+            remoteMediator = StoryRemoteMediator(database, apiService),
             pagingSourceFactory = {
-                StoryPagingSource(apiService)
+                database.storyDao().getAllStories()
             }
         ).liveData
     }
@@ -68,7 +73,7 @@ class UserRepository private constructor(
 
     companion object {
 
-        fun getInstance(userPreference: UserPreference, apiService: ApiService): UserRepository =
-            UserRepository(userPreference, apiService)
+        fun getInstance(userPreference: UserPreference, apiService: ApiService, database: StoryDatabase): UserRepository =
+            UserRepository(userPreference, apiService, database)
     }
 }

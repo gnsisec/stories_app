@@ -33,22 +33,24 @@ class MainActivity : AppCompatActivity() {
         val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
 
-        viewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
-            }
-        }
-
         val adapter = StoriesAdapter()
         binding.rvStories.adapter = adapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
                 adapter.retry()
             }
         )
-        binding.rvStories.visibility = View.VISIBLE
+
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                finish()
+            }
+            binding.rvStories.visibility = View.VISIBLE
+        }
+
         viewModel.stories.observe(this) {
             adapter.submitData(lifecycle, it)
+            adapter.notifyDataSetChanged()
         }
 
         binding.fabAddStory.setOnClickListener {

@@ -26,19 +26,12 @@ class UploadViewModel(private val repository: UserRepository) : ViewModel() {
     private val _uploadState = MutableLiveData<UploadResponse>()
     val uploadState: LiveData<UploadResponse> = _uploadState
 
-    private fun triggerFinishActivity() {
-        viewModelScope.launch {
-            _finishActivityEvent.emit(Unit)
-        }
-    }
-
     fun uploadStory(file: MultipartBody.Part, description: RequestBody) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
                 _uploadState.value = repository.uploadStory(file, description)
                 Log.d("upload", "Success: ${_uploadState.value!!.message}")
-                triggerFinishActivity()
             } catch (e: HttpException) {
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, UploadResponse::class.java)

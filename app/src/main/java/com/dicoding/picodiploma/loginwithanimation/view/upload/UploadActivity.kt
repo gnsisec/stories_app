@@ -154,9 +154,10 @@ class UploadActivity : AppCompatActivity() {
         AlertDialog.Builder(this).apply {
             setTitle(title)
             setMessage(description)
+            setCancelable(false)
             when (title) {
                 "Success!" -> {
-                    setPositiveButton("Lanjut") { _, _ ->
+                    setPositiveButton(R.string.continue_button) { _, _ ->
                         val intent = Intent(context, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -166,7 +167,7 @@ class UploadActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    setNegativeButton("Ulangi") { _, _ -> }
+                    setNegativeButton(R.string.retry_button) { _, _ -> }
                 }
             }
             create()

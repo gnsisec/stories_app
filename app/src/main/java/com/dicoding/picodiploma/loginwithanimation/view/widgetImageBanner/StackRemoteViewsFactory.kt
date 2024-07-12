@@ -8,8 +8,7 @@ import android.widget.RemoteViewsService
 import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.dicoding.picodiploma.loginwithanimation.R
-import com.dicoding.picodiploma.loginwithanimation.di.Injection
-import kotlinx.coroutines.runBlocking
+import com.dicoding.picodiploma.loginwithanimation.data.database.StoryDatabase
 
 internal class StackRemoteViewsFactory(private val mContext: Context) :
     RemoteViewsService.RemoteViewsFactory {
@@ -18,19 +17,21 @@ internal class StackRemoteViewsFactory(private val mContext: Context) :
 
     override fun onCreate() {}
 
-    override fun onDataSetChanged() = runBlocking {
+    override fun onDataSetChanged() {
         try {
-            val stories = Injection.provideRepository(mContext).getStories()
-//            if (stories.error == true) return@runBlocking
-//            val bitmap = stories.listStory!!.map {
-//                Glide.with(mContext)
-//                    .asBitmap()
-//                    .load(it!!.photoUrl)
-//                    .override(256, 2356)
-//                    .submit().get()
-//            }
+            val database: StoryDatabase = StoryDatabase.getDatabase(mContext)
+            val dao = database.storyDao()
+            val photos = dao.getAllPhotosUrl()
+            val bitmap = photos.map {
+                try {
+                    Glide.with(mContext).asBitmap().load(it).override(256, 256).submit().get()
+                } catch (e: Exception) {
+                    Glide.with(mContext).asBitmap().load(R.drawable.baseline_broken_image_24)
+                        .override(256, 256).submit().get()
+                }
+            }
             mWidgetItems.clear()
-//            mWidgetItems.addAll(bitmap)
+            mWidgetItems.addAll(bitmap)
         } catch (e: Exception) {
             e.printStackTrace()
         }

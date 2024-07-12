@@ -15,6 +15,9 @@ interface StoryDao {
     @Query("SELECT * FROM story")
     fun getAllStories(): PagingSource<Int, ListStoryItem>
 
+    @Query("SELECT photoUrl FROM story LIMIT 10")
+    fun getAllPhotosUrl(): List<String>
+
     @Query("DELETE FROM story")
     suspend fun deleteAll()
 }

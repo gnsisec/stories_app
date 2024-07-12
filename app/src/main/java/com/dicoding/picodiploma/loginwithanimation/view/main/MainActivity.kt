@@ -16,6 +16,7 @@ import com.dicoding.picodiploma.loginwithanimation.view.ViewModelFactory
 import com.dicoding.picodiploma.loginwithanimation.view.maps.MapsActivity
 import com.dicoding.picodiploma.loginwithanimation.view.upload.UploadActivity
 import com.dicoding.picodiploma.loginwithanimation.view.welcome.WelcomeActivity
+import okhttp3.internal.notifyAll
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.stories.observe(this) {
             adapter.submitData(lifecycle, it)
-            adapter.notifyDataSetChanged()
+            binding.rvStories.scrollToPosition(0)
         }
 
         binding.fabAddStory.setOnClickListener {

@@ -42,4 +42,5 @@
     <string name="map" translatable="false">Map</string>
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <string name="retry">Try Again</string>
+    <string name="live_location">Live Location</string>
 </resources>

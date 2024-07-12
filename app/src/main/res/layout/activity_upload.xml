@@ -64,8 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
-        android:text="@string/camera"
         android:backgroundTint="@color/cadetGrey"
+        android:text="@string/camera"
         app:layout_constraintEnd_toStartOf="@id/b_galery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
@@ -76,8 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
-        android:text="@string/galery"
         android:backgroundTint="@color/cadetGrey"
+        android:text="@string/galery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/b_camera"
         app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
@@ -107,16 +107,36 @@
             app:layout_constraintTop_toBottomOf="@id/b_camera" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sc_location"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tf_description" />
+
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="20dp"
+        android:text="@string/live_location"
+        app:layout_constraintBottom_toBottomOf="@+id/sc_location"
+        app:layout_constraintEnd_toStartOf="@+id/sc_location"
+        app:layout_constraintTop_toTopOf="@id/sc_location" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:text="@string/upload"
         android:backgroundTint="@color/charcoal"
+        android:text="@string/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tf_description" />
+        app:layout_constraintTop_toBottomOf="@+id/sc_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

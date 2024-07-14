@@ -113,18 +113,20 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/live_location"
         app:layout_constraintTop_toBottomOf="@id/tf_description" />
 
     <TextView
-        android:textSize="18sp"
-        android:id="@+id/school"
+        android:id="@+id/live_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="20dp"
         android:text="@string/live_location"
+        android:textSize="20sp"
+        android:paddingRight="20dp"
+        android:layout_marginLeft="-40dp"
         app:layout_constraintBottom_toBottomOf="@+id/sc_location"
-        app:layout_constraintEnd_toStartOf="@+id/sc_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/sc_location" />
 
     <com.google.android.material.button.MaterialButton

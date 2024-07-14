@@ -1,6 +1,8 @@
 package com.dicoding.picodiploma.loginwithanimation.view.upload
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -21,6 +24,10 @@ import com.dicoding.picodiploma.loginwithanimation.view.getImageUri
 import com.dicoding.picodiploma.loginwithanimation.view.main.MainActivity
 import com.dicoding.picodiploma.loginwithanimation.view.reduceFileImage
 import com.dicoding.picodiploma.loginwithanimation.view.uriToFile
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -30,6 +37,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
     private var currentImageUri: Uri? = null
+    private var lat: Float? = null
+    private var lon: Float? = null
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val viewModel by viewModels<UploadViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -43,12 +53,21 @@ class UploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.scLocation.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                getLocation()
+            } else {
+                Toast.makeText(this, "Lokasi tidak aktif", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         binding.bGalery.setOnClickListener {
             startGallery()
@@ -85,6 +104,40 @@ class UploadActivity : AppCompatActivity() {
         }
     }
 
+    private fun getLocation() {
+        val priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        val cancellationTokenSource = CancellationTokenSource()
+
+        if (ActivityCompat
+                .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat
+                .checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                101
+            )
+        }
+
+        try {
+            fusedLocationProviderClient.getCurrentLocation(
+                priority,
+                cancellationTokenSource.token
+            )
+                .addOnSuccessListener { location ->
+                    lon = location.longitude.toFloat()
+                    lat = location.latitude.toFloat()
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("Location", "Oops location failed with exception: $exception")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun uploadImage() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
@@ -98,7 +151,8 @@ class UploadActivity : AppCompatActivity() {
                 imageFile.name,
                 requestImageFile
             )
-            viewModel.uploadStory(multipartBody, requestBody)
+            Log.d("Upload", "Upload withe image: $lat $lon")
+            viewModel.uploadStory(multipartBody, requestBody, lat, lon)
         } ?: showToast(getString(R.string.empty_image_warning))
     }
 

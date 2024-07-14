@@ -67,13 +67,22 @@ class UserRepository private constructor(
         return apiService.getDetailStory(id)
     }
 
-    suspend fun uploadStory(file: MultipartBody.Part, description: RequestBody): UploadResponse {
-        return apiService.uploadStory(file, description)
+    suspend fun uploadStory(
+        file: MultipartBody.Part,
+        description: RequestBody,
+        lon: Float? = null,
+        lat: Float? = null
+    ): UploadResponse {
+        return apiService.uploadStory(file, description, lon, lat)
     }
 
     companion object {
 
-        fun getInstance(userPreference: UserPreference, apiService: ApiService, database: StoryDatabase): UserRepository =
+        fun getInstance(
+            userPreference: UserPreference,
+            apiService: ApiService,
+            database: StoryDatabase
+        ): UserRepository =
             UserRepository(userPreference, apiService, database)
     }
 }

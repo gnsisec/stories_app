@@ -54,7 +54,7 @@ class StoriesAdapter :
                         "sharedDesc"
                     ),
                 )
-                intent.putExtra("id", "${item.id}")
+                intent.putExtra("id", item.id)
                 it.context.startActivity(intent, options.toBundle())
             }
         }

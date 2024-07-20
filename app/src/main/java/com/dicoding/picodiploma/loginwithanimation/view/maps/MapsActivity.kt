@@ -1,7 +1,6 @@
 package com.dicoding.picodiploma.loginwithanimation.view.maps
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.picodiploma.loginwithanimation.R

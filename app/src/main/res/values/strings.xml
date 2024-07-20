@@ -23,8 +23,8 @@
     <string name="signup_image">signup image</string>
     <string name="image_preview">Image preview</string>
     <string name="welcome_image">Welcome Image</string>
-    <string name="your_name">your name</string>
-    <string name="your_email_address">your email address</string>
+    <string name="your_name">Fullname</string>
+    <string name="your_email_address">Email Address</string>
     <string name="retry_button">Retry</string>
     <string name="continue_button">Next</string>
     <string name="success_login">Success!</string>
@@ -43,4 +43,5 @@
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <string name="retry">Try Again</string>
     <string name="live_location">Live Location</string>
+    <string name="password_placeholder" translatable="false">*********</string>
 </resources>

@@ -24,8 +24,8 @@
     <string name="signup_image">Gambar Daftar Akun</string>
     <string name="image_preview">Pratinjau gamabr</string>
     <string name="welcome_image">Gambar Selamat Datang</string>
-    <string name="your_name">nama kamu</string>
-    <string name="your_email_address">alamat email kamu</string>
+    <string name="your_name">Nama Lengkap</string>
+    <string name="your_email_address">Alamat Email</string>
     <string name="retry_button">Ulangi</string>
     <string name="continue_button">Lanjut</string>
     <string name="success_login">Sukses!</string>

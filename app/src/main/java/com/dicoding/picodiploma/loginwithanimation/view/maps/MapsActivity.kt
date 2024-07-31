@@ -1,6 +1,9 @@
 package com.dicoding.picodiploma.loginwithanimation.view.maps
 
+import android.content.ContentValues.TAG
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.picodiploma.loginwithanimation.R
@@ -12,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -43,6 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
+        setMapStyle()
 
         viewModel.stories.observe(this) {
             val coordinates = viewModel.stories.value ?: emptyList()
@@ -52,7 +57,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     MarkerOptions().position(latLng).title(data.name).snippet(data.description)
                 )
                 boundsBuilder.include((latLng))
-                // TODO: bikin aja ke Indonesia 
             }
             val bounds: LatLngBounds = boundsBuilder.build()
             mMap.animateCamera(
@@ -63,6 +67,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     300
                 )
             )
+        }
+    }
+
+    private fun setMapStyle() {
+        try {
+            val success =
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.")
+            }
+        } catch (exception: Resources.NotFoundException) {
+            Log.e(TAG, "Can't find style. Error: ", exception)
         }
     }
 }

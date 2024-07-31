@@ -19,7 +19,6 @@ class MapsViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun getStories() {
         viewModelScope.launch {
-            //_isLoading.value = true
             try {
                 val getStory = repository.getStoriesWithLocation()
                 Log.d("MapsViewModel", "Success: ${getStory.message}")
@@ -29,7 +28,6 @@ class MapsViewModel(private val repository: UserRepository) : ViewModel() {
                 val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
                 Log.d("MapsViewModel", "Error: ${errorResponse.message}")
             }
-            //_isLoading.value = false
         }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -127,8 +128,15 @@ class UploadActivity : AppCompatActivity() {
                 cancellationTokenSource.token
             )
                 .addOnSuccessListener { location ->
+                    if (location == null) {
+                        this.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                        binding.scLocation.isChecked = false
+                        return@addOnSuccessListener
+                    }
+                    Log.d("Location", "start get location")
                     lon = location.longitude.toFloat()
                     lat = location.latitude.toFloat()
+                    Log.d("Location", "start get location $lon and $lat")
                 }
                 .addOnFailureListener { exception ->
                     Log.d("Location", "Oops location failed with exception: $exception")

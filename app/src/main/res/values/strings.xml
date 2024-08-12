@@ -44,4 +44,6 @@
     <string name="retry">Try Again</string>
     <string name="live_location">Live Location</string>
     <string name="password_placeholder" translatable="false">*********</string>
+    <string name="password_should_not_empty">Password should not be empty</string>
+    <string name="password_length_error">Password should be more than 8 characters</string>
 </resources>

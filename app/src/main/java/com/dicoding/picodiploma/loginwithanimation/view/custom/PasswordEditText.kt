@@ -3,6 +3,7 @@ package com.dicoding.picodiploma.loginwithanimation.view.custom
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.dicoding.picodiploma.loginwithanimation.R
 
 class PasswordEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -10,9 +11,9 @@ class PasswordEditText @JvmOverloads constructor(
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (s.toString().isEmpty()) {
-            setError("Password tidak boleh kosong", null)
+            setError(context.getString(R.string.password_should_not_empty), null)
         } else if (s.toString().length < 8) {
-            setError("Password tidak boleh kurang dari 8 huruf", null)
+            setError(context.getString(R.string.password_length_error), null)
         } else {
             error = null
         }

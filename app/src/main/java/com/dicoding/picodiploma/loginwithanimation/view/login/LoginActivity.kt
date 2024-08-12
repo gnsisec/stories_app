@@ -75,10 +75,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.edLoginEmail.isEnabled = !isLoading
-        binding.edLoginPassword.isEnabled = !isLoading
-        binding.loginButton.isEnabled = !isLoading
+        binding.apply {
+            this.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+            this.edLoginEmail.isEnabled = !isLoading
+            this.edLoginPassword.isEnabled = !isLoading
+            this.loginButton.isEnabled = !isLoading
+        }
+//        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+//        binding.edLoginEmail.isEnabled = !isLoading
+//        binding.edLoginPassword.isEnabled = !isLoading
+//        binding.loginButton.isEnabled = !isLoading
     }
 
 }

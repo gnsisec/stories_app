@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.picodiploma.loginwithanimation.data.UserRepository
 import com.dicoding.picodiploma.loginwithanimation.data.remote.UploadResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,13 +18,15 @@ class UploadViewModel(private val repository: UserRepository) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _finishActivityEvent = MutableSharedFlow<Unit>()
-    val finishActivityEvent = _finishActivityEvent.asSharedFlow()
-
     private val _uploadState = MutableLiveData<UploadResponse>()
     val uploadState: LiveData<UploadResponse> = _uploadState
 
-    fun uploadStory(file: MultipartBody.Part, description: RequestBody, lon: Float? = null, lat: Float? = null) {
+    fun uploadStory(
+        file: MultipartBody.Part,
+        description: RequestBody,
+        lon: Float? = null,
+        lat: Float? = null
+    ) {
         viewModelScope.launch {
             _isLoading.value = true
             try {

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var adapter: StoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: androidx.appcompat.widget.Toolbar = binding.myToolbar
         setSupportActionBar(toolbar)
 
-        val adapter = StoriesAdapter()
+        adapter = StoriesAdapter()
         binding.rvStories.adapter = adapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
                 adapter.retry()
@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.stories.observe(this) {
             adapter.submitData(lifecycle, it)
-            binding.rvStories.scrollToPosition(0)
         }
 
         binding.fabAddStory.setOnClickListener {

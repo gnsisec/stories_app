@@ -196,6 +196,8 @@ class UploadActivity : AppCompatActivity() {
     ) { isSuccess ->
         if (isSuccess) {
             showImage()
+        } else {
+            currentImageUri = null
         }
     }
 
